@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Projects | Profolio{% endblock title %}
+{% block content %}
+<section class="page-head mb-4">
+    <p class="hero-kicker mb-2">Portfolio Work</p>
+    <h1 class="display-6 fw-bold mb-2">Projects</h1>
+    <p class="text-muted mb-0">A curated set of shipped work, experiments, and practical solutions.</p>
+</section>
+
+<section class="mb-4 d-flex flex-wrap align-items-center justify-content-between gap-2">
+    <small class="text-muted">Showing {{ projects|length }} published project{{ projects|pluralize }}.</small>
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'contact:contact' %}">Discuss a project</a>
+</section>
+
+<section class="row g-4">
+    {% for project in projects %}
+        <div class="col-md-6 col-xl-4">
+            <article class="card h-100 surface-card project-card">
+                <div class="card-body d-flex flex-column">
+                    <p class="card-eyebrow mb-2">Selected Work</p>
+                    <h2 class="h5 mb-2">{{ project.title }}</h2>
+                    <p class="text-muted mb-3">{{ project.summary }}</p>
+                    {% if project.tech_stack %}
+                        <p class="mb-3">
+                            <span class="tech-pill">{{ project.tech_stack }}</span>
+                        </p>
+                    {% endif %}
+                    <div class="mt-auto">
+                        <a class="btn btn-primary btn-sm" href="{% url 'projects:detail' project.slug %}">Open project</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    {% empty %}
+        <p class="text-muted">No projects yet.</p>
+    {% endfor %}
+</section>
+{% endblock content %}

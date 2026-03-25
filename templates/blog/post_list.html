@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Blog | Profolio{% endblock title %}
+{% block content %}
+<section class="page-head mb-4">
+    <p class="hero-kicker mb-2">Thoughts and Process</p>
+    <h1 class="display-6 fw-bold mb-2">Blog</h1>
+    <p class="text-muted mb-0">Practical notes on development, product thinking, and lessons from shipped work.</p>
+</section>
+
+<div class="list-group modern-list blog-list">
+    {% for post in posts %}
+        <a class="list-group-item list-group-item-action surface-card" href="{% url 'blog:detail' post.slug %}">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <p class="card-eyebrow mb-1">Journal</p>
+                    <h2 class="h5 mb-1">{{ post.title }}</h2>
+                </div>
+                <small class="text-muted">{{ post.published_at|date:"M d, Y" }}</small>
+            </div>
+            <p class="mb-1 text-muted">{{ post.excerpt }}</p>
+        </a>
+    {% empty %}
+        <p class="text-muted">No posts yet.</p>
+    {% endfor %}
+</div>
+{% endblock content %}

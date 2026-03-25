@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} | Profolio{% endblock title %}
+{% block content %}
+<article class="card post-detail-card">
+    <div class="card-body p-4 p-md-5">
+        <p class="hero-kicker mb-2">Article</p>
+        <h1 class="h2 mb-3">{{ post.title }}</h1>
+        <p class="text-muted mb-4">
+            {% if post.author %}By {{ post.author.username }}{% endif %}
+            {% if post.published_at %} on {{ post.published_at|date:"M d, Y" }}{% endif %}
+        </p>
+        <div class="content-flow">{{ post.content|linebreaks }}</div>
+    </div>
+</article>
+<div class="mt-4">
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'blog:list' %}">Back to blog</a>
+</div>
+{% endblock content %}

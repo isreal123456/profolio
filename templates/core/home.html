@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block title %}Home | Profolio{% endblock title %}
+{% block content %}
+<section class="hero-shell p-4 p-md-5 mb-5 rounded-4">
+    <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+            <p class="hero-kicker mb-3">Modern digital portfolio</p>
+            <h1 class="hero-title fw-bold mb-3">Sharper visuals, smoother motion, and a portfolio that feels alive.</h1>
+            <p class="lead hero-copy mb-4">Built on Django, styled with layered gradients, and designed to present projects, writing, and contact flow with confidence.</p>
+            <div class="d-flex flex-wrap gap-2 hero-actions">
+                <a href="{% url 'projects:list' %}" class="btn btn-primary">Explore Projects</a>
+                <a href="{% url 'contact:contact' %}" class="btn btn-outline-light">Work With Me</a>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="hero-panel">
+                <div class="hero-panel-top">
+                    <span class="panel-dot"></span>
+                    <span class="panel-dot"></span>
+                    <span class="panel-dot"></span>
+                </div>
+                <div class="hero-metric">
+                    <span class="metric-value">12+</span>
+                    <span class="metric-label">Launch-ready interfaces with a calm backend core</span>
+                </div>
+                <div class="hero-mini-grid">
+                    <div class="mini-card">
+                        <strong>Fast setup</strong>
+                        <span>Admin-managed content with polished templates.</span>
+                    </div>
+                    <div class="mini-card">
+                        <strong>Modern feel</strong>
+                        <span>Glass surfaces, bold contrast, and motion cues.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="metrics-row mb-5">
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="metric-strip">
+                <span class="metric-strip-value">Dynamic</span>
+                <p class="mb-0 text-muted">Projects and posts update from Django models with no static editing loop.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="metric-strip">
+                <span class="metric-strip-value">Responsive</span>
+                <p class="mb-0 text-muted">The visual system scales from mobile cards to wide-screen hero layouts.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="metric-strip">
+                <span class="metric-strip-value">Intentional</span>
+                <p class="mb-0 text-muted">Color, spacing, and animation work together with clear hierarchy.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-3 section-head">
+        <h2 class="h4 mb-0">Featured Projects</h2>
+        <a href="{% url 'projects:list' %}" class="btn btn-sm btn-outline-primary">View all</a>
+    </div>
+    <div class="row g-3">
+        {% for project in featured_projects %}
+            <div class="col-md-4">
+                <div class="card h-100 surface-card">
+                    <div class="card-body">
+                        <h3 class="h5">{{ project.title }}</h3>
+                        <p class="text-muted">{{ project.summary }}</p>
+                        <a class="btn btn-primary btn-sm" href="{% url 'projects:detail' project.slug %}">Details</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-muted">No featured projects yet. Add some from admin.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-3 section-head">
+        <h2 class="h4 mb-0">What I Can Do</h2>
+        <a href="{% url 'contact:contact' %}" class="btn btn-sm btn-outline-primary">Hire me</a>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="card h-100 surface-card service-card">
+                <div class="card-body">
+                    <span class="service-index">01</span>
+                    <h3 class="h5">Django Web Apps</h3>
+                    <p class="text-muted mb-0">Secure and scalable applications with clean architecture and admin workflows.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 surface-card service-card">
+                <div class="card-body">
+                    <span class="service-index">02</span>
+                    <h3 class="h5">Modern Frontend UI</h3>
+                    <p class="text-muted mb-0">Responsive interfaces with purposeful hierarchy and smooth interactions.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 surface-card service-card">
+                <div class="card-body">
+                    <span class="service-index">03</span>
+                    <h3 class="h5">API and Integrations</h3>
+                    <p class="text-muted mb-0">Third-party integrations, payments, and automation for real products.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="d-flex justify-content-between align-items-center mb-3 section-head">
+        <h2 class="h4 mb-0">Latest Posts</h2>
+        <a href="{% url 'blog:list' %}" class="btn btn-sm btn-outline-primary">View all</a>
+    </div>
+    <div class="list-group modern-list">
+        {% for post in latest_posts %}
+            <a class="list-group-item list-group-item-action" href="{% url 'blog:detail' post.slug %}">
+                <strong>{{ post.title }}</strong>
+                <span class="text-muted d-block">{{ post.excerpt }}</span>
+            </a>
+        {% empty %}
+            <p class="text-muted">No posts yet. Add your first post in admin.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock content %}
