@@ -28,3 +28,20 @@ Open:
 - `core`: homepage and live-status endpoint
 - `projects`: project models and pages
 - `contact`: contact form and message storage
+
+## Deploy To Render
+
+This project is Render-ready via `render.yaml`.
+
+1. Push this repo to GitHub.
+2. In Render, create a new Blueprint and select this repo.
+3. Set `DJANGO_SECRET_KEY` in Render environment variables.
+4. (Optional) Set `DATABASE_URL` if using Render Postgres.
+
+Environment variables supported:
+
+- `DJANGO_SECRET_KEY`
+- `DJANGO_DEBUG`
+- `DJANGO_ALLOWED_HOSTS`
+- `DJANGO_CSRF_TRUSTED_ORIGINS`
+- `DATABASE_URL`
